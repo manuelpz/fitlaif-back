@@ -76,6 +76,13 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+                	<!-- Configuración de la memoria de la JVM -->
+                	<jvmArguments>
+                    	<jvmArgument>-Xms512m</jvmArgument> <!-- Tamaño mínimo de la memoria heap -->
+                    	<jvmArgument>-Xmx1024m</jvmArgument> <!-- Tamaño máximo de la memoria heap -->
+                	</jvmArguments>
+            	</configuration>
 			</plugin>
 		</plugins>
 	</build>

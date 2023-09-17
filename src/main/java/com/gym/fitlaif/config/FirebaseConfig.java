@@ -19,7 +19,7 @@ public class FirebaseConfig {
 	public Firestore firestore() throws Exception {
 
 		FileInputStream serviceAccount =
-				new FileInputStream("./firebase-account-info.json");
+				new FileInputStream("src/main/resources/firebase-account-info.json");
 
 		FirebaseOptions options = new FirebaseOptions.Builder()
 				.setCredentials(GoogleCredentials.fromStream(serviceAccount))

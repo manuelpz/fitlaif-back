@@ -60,12 +60,6 @@ public class EjerciciosPersonalizadosServiceImpl implements EjerciciosPersonaliz
 			ejercicio.setEjercicio(ejPersonalizado.getEjercicio());
 			Integer pesoPr = ejPersonalizado.getPr();
 			ejercicio.setPr(pesoPr);
-			for (Integer peso : ejercicio.getPeso()) {
-				if(peso != null && peso > pesoPr) {
-					ejercicio.setPr(peso);
-					pesoPr = peso;
-				}
-			}
 			persistirEjercicio(ejercicio, document);
 			return ejerciciosMapper.toDTO(ejercicio);
 		}
@@ -94,6 +88,13 @@ public class EjerciciosPersonalizadosServiceImpl implements EjerciciosPersonaliz
 	
 	public void persistirEjercicio(EjerciciosPersonalizados ejercicio, DocumentReference document) {
 		ObjectMapper mapper = new ObjectMapper();
+		Integer pesoPr = ejercicio.getPr();
+		for (Integer peso : ejercicio.getPeso()) {
+			if(peso != null && peso > pesoPr) {
+				ejercicio.setPr(peso);
+				pesoPr = peso;
+			}
+		}
         @SuppressWarnings("unchecked")
 		Map<String, Object> ejercicioMap = mapper.convertValue(ejercicio, Map.class);
         document.set(ejercicioMap);

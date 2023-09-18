@@ -19,7 +19,7 @@ public class SeriesRepeticionesMapper {
 	    List<Integer> peso = ejercicio.getPeso();
 	    Integer pr = ejercicio.getPr();
 
-	    if(series != null && repeticiones != null && pr != null) {
+	    if(series != null && repeticiones != null) {
 	    int size = Math.min(series.size(), repeticiones.size());
 	    for (int index = 0; index < size; index++) {
 	        SeriesRepeticionesDTO ser = new SeriesRepeticionesDTO();

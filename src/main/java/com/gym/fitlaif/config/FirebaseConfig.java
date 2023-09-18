@@ -1,7 +1,7 @@
 package com.gym.fitlaif.config;
 
-import java.io.FileInputStream;
-import java.lang.Exception;
+import java.io.IOException;
+import java.io.InputStream;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,18 +14,22 @@ import com.google.firebase.cloud.FirestoreClient;
 
 @Configuration
 public class FirebaseConfig {
-	
-	@Bean
-	public Firestore firestore() throws Exception {
+    
+    @Bean
+    public Firestore firestore() throws IOException {
 
-		FileInputStream serviceAccount =
-				new FileInputStream("src/main/resources/firebase-account-info.json");
+        // Carga el archivo desde el classpath (dentro del JAR)
+        InputStream serviceAccount = getClass().getResourceAsStream("/firebase-account-info.json");
 
-		FirebaseOptions options = new FirebaseOptions.Builder()
-				.setCredentials(GoogleCredentials.fromStream(serviceAccount))
-				.build();
+        if (serviceAccount == null) {
+            throw new IOException("No se pudo encontrar el archivo firebase-account-info.json en el classpath.");
+        }
 
-		FirebaseApp firebaseApp = FirebaseApp.initializeApp(options);
-		return FirestoreClient.getFirestore(firebaseApp);
-	}
+        FirebaseOptions options = new FirebaseOptions.Builder()
+                .setCredentials(GoogleCredentials.fromStream(serviceAccount))
+                .build();
+
+        FirebaseApp firebaseApp = FirebaseApp.initializeApp(options);
+        return FirestoreClient.getFirestore(firebaseApp);
+    }
 }

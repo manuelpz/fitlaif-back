@@ -17,7 +17,6 @@ import com.google.cloud.firestore.QueryDocumentSnapshot;
 import com.google.cloud.firestore.QuerySnapshot;
 import com.gym.fitlaif.domain.EjerciciosPersonalizados;
 import com.gym.fitlaif.dto.EjerciciosPersonalizadosDTO;
-import com.gym.fitlaif.dto.SeriesRepeticionesDTO;
 import com.gym.fitlaif.dto.SeriesRepeticionesYPrDTO;
 import com.gym.fitlaif.exceptions.FitLaifNotFoundException;
 import com.gym.fitlaif.mapper.EjerciciosPersonalizadosMapper;
@@ -120,4 +119,5 @@ public class EjerciciosPersonalizadosServiceImpl implements EjerciciosPersonaliz
 		SeriesRepeticionesYPrDTO seriesRepes = seriesRepeticionesMapper.toSeriesRepeticiones(ejerciciosMapper.toDTO(ejercicioPersonalizadoEncontrado));
 		return seriesRepes;
 	}
+	
 }
